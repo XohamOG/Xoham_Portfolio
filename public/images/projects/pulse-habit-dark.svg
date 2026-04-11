@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" fill="none">
+  <rect width="1200" height="720" fill="#0f1420"/>
+  <rect x="38" y="38" width="1124" height="644" stroke="#000000" stroke-width="8"/>
+  <rect x="420" y="90" width="360" height="540" rx="4" stroke="#000000" stroke-width="7"/>
+  <circle cx="600" cy="156" r="16" fill="#000000"/>
+  <rect x="470" y="208" width="260" height="54" stroke="#000000" stroke-width="5"/>
+  <rect x="470" y="288" width="260" height="54" stroke="#000000" stroke-width="5"/>
+  <rect x="470" y="368" width="260" height="54" stroke="#000000" stroke-width="5"/>
+  <path d="M500 235L550 235" stroke="#000000" stroke-width="4"/>
+  <path d="M500 315L610 315" stroke="#000000" stroke-width="4"/>
+  <path d="M500 395L640 395" stroke="#000000" stroke-width="4"/>
+  <text x="600" y="650" text-anchor="middle" fill="#000000" font-size="58" font-family="Arial, sans-serif">Forensodont</text>
+</svg>

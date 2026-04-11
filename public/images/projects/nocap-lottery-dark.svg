@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" fill="none">
+  <defs>
+    <pattern id="dots" width="28" height="28" patternUnits="userSpaceOnUse">
+      <circle cx="3" cy="3" r="2" fill="#6a7894" opacity="0.35" />
+    </pattern>
+    <linearGradient id="wash" x1="0" y1="0" x2="1200" y2="700" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0f1420" />
+      <stop offset="1" stop-color="#0a0f18" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="700" fill="url(#wash)" />
+  <rect width="1200" height="700" fill="url(#dots)" />
+
+  <g transform="translate(120 90)">
+    <rect x="14" y="14" width="900" height="500" rx="18" fill="#f4f7ff" opacity="0.12" />
+    <rect width="900" height="500" rx="18" fill="#0f1420" stroke="#f4f7ff" stroke-width="8" />
+
+    <rect x="42" y="36" width="210" height="42" rx="10" fill="#203246" stroke="#f4f7ff" stroke-width="4" />
+    <text x="62" y="63" fill="#f4f7ff" font-size="24" font-family="Inter, Segoe UI, Arial" font-weight="700">NOCAP LOTTERY</text>
+
+    <rect x="122" y="132" width="300" height="220" rx="22" fill="#0f1420" stroke="#f4f7ff" stroke-width="6" />
+    <path d="M178 190H366" stroke="#f4f7ff" stroke-width="8" stroke-linecap="round" />
+    <path d="M178 230H366" stroke="#f4f7ff" stroke-width="8" stroke-linecap="round" />
+    <path d="M178 270H314" stroke="#f4f7ff" stroke-width="8" stroke-linecap="round" />
+    <rect x="206" y="292" width="132" height="34" rx="9" fill="#3a3f12" stroke="#f4f7ff" stroke-width="4" />
+
+    <g transform="translate(488 150)">
+      <rect width="280" height="90" rx="16" fill="#0f1420" stroke="#f4f7ff" stroke-width="6" />
+      <rect x="24" y="24" width="60" height="42" rx="9" fill="#203246" stroke="#f4f7ff" stroke-width="4" />
+      <path d="M106 45H246" stroke="#f4f7ff" stroke-width="7" stroke-linecap="round" />
+      <circle cx="242" cy="45" r="14" fill="#86afff" stroke="#f4f7ff" stroke-width="4" />
+    </g>
+
+    <g transform="translate(508 292)">
+      <circle cx="26" cy="26" r="22" fill="#3a3f12" stroke="#f4f7ff" stroke-width="6" />
+      <circle cx="116" cy="26" r="22" fill="#203246" stroke="#f4f7ff" stroke-width="6" />
+      <circle cx="206" cy="26" r="22" fill="#3a2631" stroke="#f4f7ff" stroke-width="6" />
+      <path d="M48 26H94" stroke="#f4f7ff" stroke-width="6" />
+      <path d="M138 26H184" stroke="#f4f7ff" stroke-width="6" />
+    </g>
+
+    <text x="44" y="454" fill="#f4f7ff" font-size="24" font-family="Inter, Segoe UI, Arial" font-weight="600">Winner takes yield, everyone keeps principal.</text>
+  </g>
+</svg>

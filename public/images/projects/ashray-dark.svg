@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" fill="none">
+  <defs>
+    <pattern id="dots" width="28" height="28" patternUnits="userSpaceOnUse">
+      <circle cx="3" cy="3" r="2" fill="#6a7894" opacity="0.35" />
+    </pattern>
+    <linearGradient id="wash" x1="0" y1="0" x2="1200" y2="700" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0f1420" />
+      <stop offset="1" stop-color="#0a0f18" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="700" fill="url(#wash)" />
+  <rect width="1200" height="700" fill="url(#dots)" />
+
+  <g transform="translate(120 90)">
+    <rect x="14" y="14" width="900" height="500" rx="18" fill="#f4f7ff" opacity="0.12" />
+    <rect width="900" height="500" rx="18" fill="#0f1420" stroke="#f4f7ff" stroke-width="8" />
+
+    <rect x="42" y="36" width="146" height="42" rx="10" fill="#203246" stroke="#f4f7ff" stroke-width="4" />
+    <text x="62" y="63" fill="#f4f7ff" font-size="24" font-family="Inter, Segoe UI, Arial" font-weight="700">ASHRAY</text>
+
+    <rect x="116" y="128" width="660" height="300" rx="22" fill="#0f1420" stroke="#f4f7ff" stroke-width="6" />
+    <rect x="148" y="166" width="194" height="224" rx="14" fill="#203246" stroke="#f4f7ff" stroke-width="6" />
+    <rect x="372" y="166" width="194" height="224" rx="14" fill="#0f1420" stroke="#f4f7ff" stroke-width="6" />
+    <rect x="596" y="166" width="148" height="224" rx="14" fill="#3a3f12" stroke="#f4f7ff" stroke-width="6" />
+
+    <path d="M178 210H312" stroke="#f4f7ff" stroke-width="7" stroke-linecap="round" />
+    <path d="M402 210H536" stroke="#f4f7ff" stroke-width="7" stroke-linecap="round" />
+    <path d="M626 210H714" stroke="#f4f7ff" stroke-width="7" stroke-linecap="round" />
+
+    <path d="M178 262H312" stroke="#f4f7ff" stroke-width="7" stroke-linecap="round" stroke-dasharray="10 10" />
+    <path d="M402 262H536" stroke="#f4f7ff" stroke-width="7" stroke-linecap="round" stroke-dasharray="10 10" />
+    <path d="M626 262H714" stroke="#f4f7ff" stroke-width="7" stroke-linecap="round" stroke-dasharray="10 10" />
+
+    <rect x="804" y="174" width="58" height="58" rx="11" fill="#3a2631" stroke="#f4f7ff" stroke-width="5" />
+    <rect x="804" y="250" width="58" height="58" rx="11" fill="#203246" stroke="#f4f7ff" stroke-width="5" />
+    <rect x="804" y="326" width="58" height="58" rx="11" fill="#3a3f12" stroke="#f4f7ff" stroke-width="5" />
+
+    <text x="44" y="454" fill="#f4f7ff" font-size="24" font-family="Inter, Segoe UI, Arial" font-weight="600">Full-stack social-impact platform with modular API-driven architecture.</text>
+  </g>
+</svg>

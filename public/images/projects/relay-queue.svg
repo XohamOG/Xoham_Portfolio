@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" fill="none">
+  <rect width="1200" height="720" fill="#ffffff"/>
+  <rect x="28" y="28" width="1144" height="664" stroke="#000000" stroke-width="8"/>
+  <rect x="110" y="130" width="300" height="170" stroke="#000000" stroke-width="6"/>
+  <rect x="450" y="130" width="300" height="170" stroke="#000000" stroke-width="6"/>
+  <rect x="790" y="130" width="300" height="170" stroke="#000000" stroke-width="6"/>
+  <rect x="280" y="410" width="300" height="170" stroke="#000000" stroke-width="6"/>
+  <rect x="620" y="410" width="300" height="170" stroke="#000000" stroke-width="6"/>
+  <path d="M410 215L450 215" stroke="#000000" stroke-width="5"/>
+  <path d="M750 215L790 215" stroke="#000000" stroke-width="5"/>
+  <path d="M600 300L600 410" stroke="#000000" stroke-width="5"/>
+  <text x="600" y="665" text-anchor="middle" fill="#000000" font-size="58" font-family="Arial, sans-serif">Relay Queue</text>
+</svg>

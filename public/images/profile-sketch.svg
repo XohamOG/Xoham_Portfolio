@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 900" fill="none">
+  <rect width="720" height="900" fill="#ffffff"/>
+  <rect x="18" y="18" width="684" height="864" stroke="#000000" stroke-width="8"/>
+  <circle cx="360" cy="290" r="130" stroke="#000000" stroke-width="8"/>
+  <path d="M200 690C236 570 305 525 360 525C416 525 485 570 520 690" stroke="#000000" stroke-width="8" stroke-linecap="round"/>
+  <path d="M250 308C280 280 320 265 360 265C400 265 440 280 470 308" stroke="#000000" stroke-width="6" stroke-linecap="round"/>
+  <path d="M305 345L335 345" stroke="#000000" stroke-width="7" stroke-linecap="round"/>
+  <path d="M385 345L415 345" stroke="#000000" stroke-width="7" stroke-linecap="round"/>
+  <path d="M315 410C345 442 376 443 406 410" stroke="#000000" stroke-width="6" stroke-linecap="round"/>
+  <path d="M80 780L640 780" stroke="#000000" stroke-width="5" stroke-dasharray="10 10"/>
+  <text x="360" y="835" text-anchor="middle" fill="#000000" font-size="42" font-family="Arial, sans-serif">Profile Sketch</text>
+</svg>
