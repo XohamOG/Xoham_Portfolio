@@ -214,7 +214,7 @@ export const achievements: Achievement[] = [
       "Won six hackathons by shipping production-ready solutions across AI, agentic AI, blockchain, and machine-learning problem statements.",
   },
   {
-    title: "9.35 CGPA (Semester 5)",
+    title: "Academic Excellence (Semester 5)",
     detail:
       "Maintained strong academic performance while balancing internships, competitive coding, and end-to-end project development.",
   },

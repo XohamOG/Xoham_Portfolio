@@ -1,7 +1,9 @@
 "use client";
 
-import { useCallback, useEffect, useRef, type CSSProperties } from "react";
+import { useCallback, useEffect, useRef, useState, type CSSProperties } from "react";
+import { AnimatePresence } from "framer-motion";
 import gsap from "gsap";
+import Tetris from "./Tetris";
 
 type CubesProps = {
   gridSize?: number;
@@ -39,6 +41,11 @@ export default function Cubes({
   rippleColor = "#fff",
   rippleSpeed = 2,
 }: CubesProps) {
+  const [showMinigame, setShowMinigame] = useState(false);
+  const clickCountRef = useRef(0);
+  const lastClickTimeRef = useRef(0);
+  const minigameTimerRef = useRef<number | null>(null);
+
   const sceneRef = useRef<HTMLDivElement | null>(null);
   const rafRef = useRef<number | null>(null);
   const idleTimerRef = useRef<number | null>(null);
@@ -229,6 +236,22 @@ export default function Cubes({
         return;
       }
 
+      const now = Date.now();
+      if (now - lastClickTimeRef.current < 500) {
+        clickCountRef.current += 1;
+      } else {
+        clickCountRef.current = 1;
+      }
+      lastClickTimeRef.current = now;
+
+      if (clickCountRef.current >= 5) {
+        if (minigameTimerRef.current) window.clearTimeout(minigameTimerRef.current);
+        minigameTimerRef.current = window.setTimeout(() => {
+          setShowMinigame(true);
+          clickCountRef.current = 0;
+        }, 1500);
+      }
+
       if (cubeElementsRef.current.length === 0) {
         hydrateSceneRefs();
       }
@@ -414,6 +437,10 @@ export default function Cubes({
       if (idleTimerRef.current != null) {
         window.clearTimeout(idleTimerRef.current);
       }
+      
+      if (minigameTimerRef.current != null) {
+        window.clearTimeout(minigameTimerRef.current);
+      }
 
       cubeElementsRef.current = [];
       cubeFacesMapRef.current.clear();
@@ -456,7 +483,10 @@ export default function Cubes({
   };
 
   return (
-    <div className="default-animation" style={wrapperStyle}>
+    <div className="default-animation relative" style={wrapperStyle}>
+      <AnimatePresence>
+        {showMinigame && <Tetris onClose={() => setShowMinigame(false)} />}
+      </AnimatePresence>
       <div ref={sceneRef} className="default-animation--scene" style={sceneStyle}>
         {cells.map((_, rowIndex) =>
           cells.map((__, colIndex) => (

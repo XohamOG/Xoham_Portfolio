@@ -1,7 +1,6 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import emailjs from "@emailjs/browser";
 import { motion } from "framer-motion";
 import { FormEvent, useState } from "react";
 import { FaGithub, FaLinkedin } from "react-icons/fa6";
@@ -42,30 +41,30 @@ export default function Contact() {
     setIsSending(true);
 
     try {
-      const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
-      const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
-      const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
-
-      if (!serviceId || !templateId || !publicKey) {
-        throw new Error("EmailJS environment variables are missing.");
-      }
-
-      await emailjs.send(
-        serviceId,
-        templateId,
-        {
-          from_name: form.name,
-          from_email: form.email,
-          message: form.message,
-          to_name: personalInfo.name,
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
         },
-        { publicKey },
-      );
+        body: JSON.stringify({
+          // TODO: Replace with your actual Web3Forms Access Key
+          access_key: "107c1fc6-89c4-48c1-8807-f99ca2a31c28",
+          ...form
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!data.success) {
+        throw new Error(data.message || "Failed to send message.");
+      }
 
       setFeedback("Message sent. I will get back to you soon.");
       setForm(initialFormState);
-    } catch {
-      setFeedback("Could not send message. Please verify EmailJS keys or email me directly.");
+    } catch (err: any) {
+      console.error(err);
+      setFeedback("Could not send message. Please try again or email me directly.");
     } finally {
       setIsSending(false);
     }
@@ -78,10 +77,10 @@ export default function Contact() {
       <div className="section-shell relative z-10 grid gap-8 md:grid-cols-[1.05fr_1fr] md:gap-10">
         <div>
           <p className="font-display text-[clamp(2.8rem,8vw,5rem)] leading-[0.84] md:whitespace-nowrap">
-            {"Let's build something."}
+            Contact Me
           </p>
           <p className="mt-4 max-w-[44ch] text-sm leading-relaxed sm:text-base">
-            Building something in mobility, healthcare, fintech, or AI? Share your idea and I can help architect and ship reliable backend-first solutions.
+            Let's build something or have any queries regarding placement / hackathons or anything in general, just send a message here itself and I'll get back to you, or drop me an email below.
           </p>
 
           <div className="section-divider my-8" />

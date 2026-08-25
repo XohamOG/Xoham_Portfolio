@@ -48,8 +48,8 @@
   --lined-rule: rgba(244, 247, 255, 0.11);
   --lined-margin: rgba(244, 247, 255, 0.14);
   --lined-dot: rgba(244, 247, 255, 0.08);
-  --shadow-hard: 6px 6px 0 rgba(0, 0, 0, 0.55);
-  --shadow-press: 3px 3px 0 rgba(0, 0, 0, 0.4);
+  --shadow-hard: 6px 6px 0 rgba(255, 255, 255, 0.12);
+  --shadow-press: 2px 2px 0 rgba(255, 255, 255, 0.12);
 }
 
 * {
@@ -179,8 +179,8 @@ textarea {
 @media (hover: hover) and (pointer: fine) {
   .brutal-card:hover,
   .brutal-card:focus-within {
-    transform: translate3d(2px, 2px, 0) rotate(var(--card-tilt, 0deg));
-    box-shadow: 4px 4px 0 var(--black);
+    transform: translate3d(-4px, -4px, 0) rotate(var(--card-tilt, 0deg));
+    box-shadow: 10px 10px 0 var(--black);
   }
 }
 
@@ -191,8 +191,10 @@ textarea {
   color: var(--black);
   box-shadow: var(--shadow-hard);
   transition:
-    transform 0.14s steps(1, end),
-    box-shadow 0.14s steps(1, end);
+    transform 200ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 200ms cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 200ms ease,
+    color 200ms ease;
 }
 
 .theme-toggle-btn {
@@ -233,12 +235,12 @@ textarea {
 }
 
 .brutal-btn:hover {
-  transform: translate(3px, 3px);
-  box-shadow: var(--shadow-press);
+  transform: translate3d(-3px, -3px, 0);
+  box-shadow: 6px 6px 0 var(--black);
 }
 
 .brutal-btn:active {
-  transform: translate(6px, 6px);
+  transform: translate3d(2px, 2px, 0);
   box-shadow: 0 0 0 var(--black);
 }
 
@@ -320,14 +322,15 @@ textarea {
 }
 
 :root[data-theme="dark"] .brutal-btn.bg-white {
-  background-color: #f4f7ff !important;
-  color: #0d121a !important;
-  border-color: #f4f7ff !important;
+  background-color: #1a1f29 !important;
+  color: #f4f7ff !important;
+  border-color: rgba(244, 247, 255, 0.2) !important;
 }
 
 :root[data-theme="dark"] .brutal-btn.bg-black {
-  background-color: var(--surface-strong) !important;
+  background-color: #0d121a !important;
   color: #f4f7ff !important;
+  border-color: rgba(244, 247, 255, 0.4) !important;
 }
 
 .stamp-tag:hover {

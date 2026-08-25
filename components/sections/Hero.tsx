@@ -124,7 +124,6 @@ export default function Hero() {
 
           <div className="mt-5 flex flex-wrap gap-2 text-xs font-semibold uppercase tracking-[0.09em]">
             <span className="stamp-tag px-3 py-2">6x Hackathon Winner</span>
-            <span className="stamp-tag px-3 py-2">9.35 CGPA (Sem 5)</span>
             <span className="stamp-tag px-3 py-2">B.E. CSE @ VESIT</span>
           </div>
 

@@ -95,9 +95,9 @@ export default function Projects() {
                   exit={{ opacity: 0, y: 22, scale: 0.96 }}
                   transition={{ duration: 0.3, delay: index * 0.08 }}
                 >
-                  <TiltCard className="h-full" maxTilt={5}>
+                  <TiltCard maxTilt={5}>
                     <BrutalCard
-                      className="flex h-full flex-col overflow-hidden p-0"
+                      className="flex flex-col overflow-hidden p-0 h-full"
                       tilt={index % 2 === 0 ? -1 : 1}
                     >
                       <div className="relative h-48 border-b-[4px] border-black bg-white">
