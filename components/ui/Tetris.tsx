@@ -40,7 +40,7 @@ export default function Minigame({ onClose }: { onClose: () => void }) {
           <h2 className="text-lg font-medium uppercase tracking-[0.2em] text-white/80 font-mono">{game.name}</h2>
           <button 
             onClick={onClose}
-            className="border border-white/20 bg-transparent text-white/80 px-4 py-2 hover:bg-white/10 transition-colors active:translate-y-[2px] active:translate-x-[2px] font-medium uppercase text-xs tracking-wider"
+            className="brutal-btn bg-white px-4 py-1.5 text-xs font-bold uppercase tracking-wider"
           >
             Close
           </button>
