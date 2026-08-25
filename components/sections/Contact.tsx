@@ -80,7 +80,7 @@ export default function Contact() {
             Contact Me
           </p>
           <p className="mt-4 max-w-[44ch] text-sm leading-relaxed sm:text-base">
-            Let's build something or have any queries regarding placement / hackathons or anything in general, just send a message here itself and I'll get back to you, or drop me an email below.
+            Let&apos;s build something or have any queries regarding placement / hackathons or anything in general, just send a message here itself and I&apos;ll get back to you, or drop me an email below.
           </p>
 
           <div className="section-divider my-8" />
