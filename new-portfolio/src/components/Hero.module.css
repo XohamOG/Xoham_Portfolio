@@ -1,4 +1,4 @@
-.heroSection {
+.heroContainer {
   position: relative;
   min-height: 100vh;
   width: 100%;
@@ -6,151 +6,296 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 7rem 2.5rem 2.5rem;
+  padding: 1.75rem 2rem 2.5rem;
   z-index: 10;
+  pointer-events: none;
 }
 
-.editorialTop {
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: var(--ice-silver-muted);
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-top: 1rem;
-}
-
-.tagBracket {
-  color: var(--ice-silver-dim);
-}
-
-.tagText {
-  color: var(--ice-silver-muted);
-  font-weight: 500;
-}
-
-.centerpiece {
+/* Header & Floating Nav */
+.header {
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  flex-grow: 1;
+  pointer-events: auto;
+  z-index: 50;
 }
 
-.bottomHud {
+/* Center Content */
+.centerStage {
+  margin: auto 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  pointer-events: auto;
+  user-select: none;
+  cursor: default;
+}
+
+.eyebrow {
+  font-family: var(--font-mono, monospace);
+  font-size: clamp(0.7rem, 1vw, 0.8rem);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(235, 241, 246, 0.45);
+  margin-bottom: 1.25rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  transition: color 0.3s ease;
+}
+
+.eyebrowDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--accent-cyan, #00f0ff);
+  box-shadow: 0 0 10px var(--accent-cyan, #00f0ff);
+  animation: pulseDot 2.2s infinite ease-in-out;
+}
+
+@keyframes pulseDot {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(0.85);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
+/* Main Interactive Title */
+.titleWrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+}
+
+.title {
+  font-family: var(--font-display, sans-serif);
+  font-size: clamp(4.2rem, 14vw, 10.5rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  transition: letter-spacing 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.titleWrapper:hover .title {
+  letter-spacing: -0.02em;
+}
+
+/* Initial letter morph slot: S <-> X */
+.letterSlot {
+  position: relative;
+  display: inline-block;
+  perspective: 700px;
+  transform-style: preserve-3d;
+  width: 0.64em;
+  height: 1em;
+  vertical-align: middle;
+}
+
+.charS,
+.charX {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  max-width: 1400px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backface-visibility: hidden;
+  transition:
+    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    color 0.4s ease;
+}
+
+/* Idle State: 'S' visible in white */
+.charS {
+  transform: rotateX(0deg) translateZ(0);
+  opacity: 1;
+  color: #ffffff;
+  text-shadow: 0 0 35px rgba(255, 255, 255, 0.2);
+}
+
+/* Idle State: 'X' hidden below */
+.charX {
+  transform: rotateX(-90deg) translateZ(25px);
+  opacity: 0;
+  color: var(--accent-cyan, #00f0ff);
+  text-shadow:
+    0 0 20px rgba(0, 240, 255, 0.9),
+    0 0 50px rgba(0, 240, 255, 0.5),
+    0 0 90px rgba(0, 240, 255, 0.25);
+  filter: drop-shadow(0 0 16px rgba(0, 240, 255, 0.8));
+}
+
+/* Hover State: S flips out, X flips in in brilliant cyan */
+.titleWrapper:hover .charS,
+.isHovered .charS {
+  transform: rotateX(90deg) translateZ(25px);
+  opacity: 0;
+}
+
+.titleWrapper:hover .charX,
+.isHovered .charX {
+  transform: rotateX(0deg) translateZ(0);
+  opacity: 1;
+}
+
+/* Background Cyan Aura on hover */
+.cyanGlowBackdrop {
+  position: absolute;
+  top: 50%;
+  left: 15%;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 240, 255, 0.35) 0%, rgba(0, 240, 255, 0) 70%);
+  transform: translate(-50%, -50%) scale(0.6);
+  opacity: 0;
+  filter: blur(25px);
+  pointer-events: none;
+  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: -1;
+}
+
+.titleWrapper:hover .cyanGlowBackdrop,
+.isHovered .cyanGlowBackdrop {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1.3);
+}
+
+/* Rest of the letters: OHAM */
+.charGroup {
+  display: inline-flex;
+}
+
+.tailChar {
+  display: inline-block;
+  color: #ffffff;
+  transition:
+    transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    color 0.4s ease,
+    text-shadow 0.4s ease;
+}
+
+.titleWrapper:hover .tailChar:nth-child(1),
+.isHovered .tailChar:nth-child(1) {
+  transform: translateY(-3px);
+  transition-delay: 0.02s;
+}
+
+.titleWrapper:hover .tailChar:nth-child(2),
+.isHovered .tailChar:nth-child(2) {
+  transform: translateY(-4px);
+  transition-delay: 0.05s;
+}
+
+.titleWrapper:hover .tailChar:nth-child(3),
+.isHovered .tailChar:nth-child(3) {
+  transform: translateY(-3px);
+  transition-delay: 0.08s;
+}
+
+.titleWrapper:hover .tailChar:nth-child(4),
+.isHovered .tailChar:nth-child(4) {
+  transform: translateY(-2px);
+  transition-delay: 0.11s;
+}
+
+/* Subtitle & Tagline */
+.subline {
+  font-family: var(--font-mono, monospace);
+  font-size: clamp(0.75rem, 1.2vw, 0.95rem);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(235, 241, 246, 0.65);
+  margin-top: 1.75rem;
+  transition: color 0.3s ease;
+}
+
+.titleWrapper:hover ~ .subline,
+.isHovered ~ .subline {
+  color: rgba(235, 241, 246, 0.9);
+}
+
+.sublineHighlight {
+  color: var(--accent-cyan, #00f0ff);
+  font-weight: 600;
+}
+
+/* Bottom Minimal Indicator */
+.footer {
+  width: 100%;
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
-  border-top: 1px solid var(--ice-silver-border);
-  padding-top: 1.5rem;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.16em;
-}
-
-.hudColLeft,
-.hudColRight {
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-}
-
-.hudColRight {
-  align-items: flex-end;
-  text-align: right;
-}
-
-.hudLabel {
-  font-size: 0.62rem;
-  letter-spacing: 0.22em;
-  color: var(--ice-silver-dim);
-}
-
-.hudValue {
-  color: var(--ice-silver);
-  font-weight: 500;
-}
-
-.hudColCenter {
-  display: flex;
-  flex-direction: column;
   align-items: center;
+  font-family: var(--font-mono, monospace);
+  font-size: clamp(0.65rem, 0.9vw, 0.72rem);
+  letter-spacing: 0.2em;
+  color: rgba(235, 241, 246, 0.35);
+  text-transform: uppercase;
+  pointer-events: auto;
 }
 
-.scrollIndicator {
-  display: flex;
-  flex-direction: column;
+.scrollCue {
+  display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.6rem;
 }
 
 .scrollLine {
-  width: 1px;
-  height: 28px;
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    var(--ice-silver-muted) 50%,
-    var(--marigold) 100%
-  );
-  animation: scrollPulse 2.2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+  width: 32px;
+  height: 1px;
+  background-color: rgba(235, 241, 246, 0.25);
+  position: relative;
+  overflow: hidden;
 }
 
-@keyframes scrollPulse {
+.scrollLine::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background-color: var(--accent-cyan, #00f0ff);
+  animation: scrollScan 2.4s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+@keyframes scrollScan {
   0% {
-    transform: scaleY(0);
-    transform-origin: top;
-    opacity: 0;
+    left: -100%;
   }
-  50% {
-    transform: scaleY(1);
-    transform-origin: top;
-    opacity: 1;
-  }
-  50.1% {
-    transform-origin: bottom;
-  }
-  100% {
-    transform: scaleY(0);
-    transform-origin: bottom;
-    opacity: 0;
+  50%, 100% {
+    left: 100%;
   }
 }
 
-.scrollText {
-  font-size: 0.62rem;
-  letter-spacing: 0.25em;
-  color: var(--ice-silver-dim);
-}
-
-@media (max-width: 768px) {
-  .heroSection {
-    padding: 6rem 1.25rem 1.5rem;
+@media (max-width: 640px) {
+  .heroContainer {
+    padding: 1.25rem 1rem 1.75rem;
   }
-
-  .editorialTop {
-    font-size: 0.65rem;
-    letter-spacing: 0.16em;
-    text-align: center;
+  .title {
+    font-size: clamp(3.2rem, 16vw, 5.5rem);
   }
-
-  .bottomHud {
-    flex-direction: column;
-    align-items: center;
-    gap: 1.25rem;
-    text-align: center;
+  .footer {
+    justify-content: center;
   }
-
-  .hudColRight {
-    align-items: center;
-    text-align: center;
-  }
-
-  .hudColCenter {
-    order: 3;
+  .footerSide {
+    display: none;
   }
 }

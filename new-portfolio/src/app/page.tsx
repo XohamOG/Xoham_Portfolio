@@ -1,21 +1,29 @@
-import Navigation from "@/components/Navigation";
-import BackgroundEffects from "@/components/BackgroundEffects";
+import CursorWave from "@/components/CursorWave";
 import Hero from "@/components/Hero";
 
 export default function Home() {
   return (
-    <main style={{ position: "relative", minHeight: "100vh", overflow: "hidden" }}>
-      {/* Subtle organic film grain texture */}
-      <div className="grain-overlay" aria-hidden="true" />
-
-      {/* Dynamic ambient cursor glow & grid crosshairs */}
-      <BackgroundEffects />
-
-      {/* Minimalist Topbar with 3-lines menu & editorial drawer */}
-      <Navigation />
-
-      {/* Hero section with kinetic SOHAM ➔ XOHAM title */}
-      <Hero />
+    <main style={{ minHeight: "100vh", position: "relative", backgroundColor: "#060608" }}>
+      <CursorWave
+        shape="mixed"
+        colorMode="multicolor"
+        cellSize={42}
+        influenceRadiusVmin={24}
+        attackTime={0.2}
+        releaseTime={0.58}
+        idleScale={0.11}
+        minPeakScale={0.75}
+        maxPeakScale={1.6}
+        burstSpeed={820}
+        burstThickness={120}
+        backgroundColor="#060608"
+        idleAlpha={0.24}
+        ambientWave={true}
+        waveSpin={0.06}
+        displacementFactor={0.09}
+      >
+        <Hero />
+      </CursorWave>
     </main>
   );
 }

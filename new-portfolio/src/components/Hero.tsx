@@ -1,63 +1,94 @@
 "use client";
 
-import React from "react";
-import { motion } from "framer-motion";
-import InteractiveTitle from "./InteractiveTitle";
+import React, { useState } from "react";
+import GooeyNav, { GooeyNavItem } from "./GooeyNav";
 import styles from "./Hero.module.css";
 
+const NAV_ITEMS: GooeyNavItem[] = [
+  { label: "Home", href: "#home" },
+  { label: "Projects", href: "#projects" },
+  { label: "Achievements", href: "#achievements" },
+  { label: "Gallery", href: "#gallery" },
+];
+
 export default function Hero() {
+  const [activeNav, setActiveNav] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
-    <section id="hero" className={styles.heroSection}>
-      {/* Editorial top tag */}
-      <motion.div
-        className={styles.editorialTop}
-        initial={{ opacity: 0, y: -15 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-      >
-        <span className={styles.tagBracket}>[</span>
-        <span className={styles.tagText}>
-          CREATIVE TECHNOLOGIST &bull; INTERFACE ARCHITECT
-        </span>
-        <span className={styles.tagBracket}>]</span>
-      </motion.div>
+    <section className={styles.heroContainer}>
+      {/* Top Floating GooeyNav */}
+      <header className={styles.header}>
+        <GooeyNav
+          items={NAV_ITEMS}
+          activeIndex={activeNav}
+          onChange={(index) => setActiveNav(index)}
+          theme="dark"
+          color="#00f0ff"
+          activeTextColor="#060608"
+          size="md"
+          frame={true}
+          gooeyness={0.65}
+          wobble={0.8}
+          hoverEffect={true}
+        />
+      </header>
 
-      {/* Hero Centerpiece: Just SOHAM with interactive transmutation to XOHAM */}
-      <motion.div
-        className={styles.centerpiece}
-        initial={{ opacity: 0, scale: 0.96 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
-      >
-        <InteractiveTitle />
-      </motion.div>
-
-      {/* Hero Bottom Bar / Technical HUD */}
-      <motion.div
-        className={styles.bottomHud}
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-      >
-        <div className={styles.hudColLeft}>
-          <span className={styles.hudLabel}>EXPERTISE</span>
-          <span className={styles.hudValue}>
-            WEB3 ARCHITECTURE / BESPOKE INTERACTION
-          </span>
+      {/* Centerpiece Minimal Hero Title */}
+      <div className={styles.centerStage}>
+        {/* Subtle Eyebrow Label */}
+        <div className={styles.eyebrow}>
+          <span className={styles.eyebrowDot} />
+          <span>[ 01 // IDENTITY ]</span>
         </div>
 
-        <div className={styles.hudColCenter}>
-          <div className={styles.scrollIndicator}>
-            <span className={styles.scrollLine} />
-            <span className={styles.scrollText}>SCROLL</span>
-          </div>
+        {/* Interactive Title: SOHAM -> XOHAM (Hover turns S to Cyan X) */}
+        <div
+          className={`${styles.titleWrapper} ${isHovered ? styles.isHovered : ""}`}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+          onClick={() => setIsHovered((prev) => !prev)}
+          role="button"
+          tabIndex={0}
+          aria-label="Soham (also known as Xoham)"
+        >
+          {/* Subtle Cyan Glow Aura Backdrop */}
+          <div className={styles.cyanGlowBackdrop} />
+
+          <h1 className={styles.title}>
+            {/* The 3D Morphing First Letter: S -> X */}
+            <span className={styles.letterSlot}>
+              <span className={styles.charS}>S</span>
+              <span className={styles.charX}>X</span>
+            </span>
+
+            {/* The Rest of the Name: O H A M */}
+            <span className={styles.charGroup}>
+              <span className={styles.tailChar}>O</span>
+              <span className={styles.tailChar}>H</span>
+              <span className={styles.tailChar}>A</span>
+              <span className={styles.tailChar}>M</span>
+            </span>
+          </h1>
         </div>
 
-        <div className={styles.hudColRight}>
-          <span className={styles.hudLabel}>LOCATION & TIME</span>
-          <span className={styles.hudValue}>IST +05:30 {"//"} REMOTE & GLOBAL</span>
+        {/* Minimal Subtitle */}
+        <p className={styles.subline}>
+          Creative Developer <span className={styles.sublineHighlight}>&bull;</span> Designer
+        </p>
+      </div>
+
+      {/* Bottom Minimal Footer Cue */}
+      <footer className={styles.footer}>
+        <span className={styles.footerSide}>PORTFOLIO // 2026</span>
+
+        <div className={styles.scrollCue}>
+          <span>SCROLL</span>
+          <span className={styles.scrollLine} />
         </div>
-      </motion.div>
+
+        <span className={styles.footerSide}>AVAILABLE WORLDWIDE</span>
+      </footer>
     </section>
   );
 }
