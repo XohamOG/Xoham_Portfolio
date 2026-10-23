@@ -1,27 +1,54 @@
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+  /* =========================================================================
+     Color Palette: Ice Silver (Primary), Deep Aubergine (Secondary), Marigold (Accent)
+     ========================================================================= */
+  
+  /* Primary: Ice Silver (Crisp, metallic, luminous) */
+  --ice-silver: #ebf1f6;
+  --ice-silver-bright: #ffffff;
+  --ice-silver-muted: #95a5b8;
+  --ice-silver-dim: #5c6877;
+  --ice-silver-border: rgba(235, 241, 246, 0.09);
+  --ice-silver-border-hover: rgba(235, 241, 246, 0.22);
+  --ice-silver-glass: rgba(235, 241, 246, 0.04);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+  /* Secondary: Deep Aubergine (Rich, mysterious, deep plum-violet void) */
+  --deep-aubergine-void: #07040d;
+  --deep-aubergine: #0e0717;
+  --deep-aubergine-surface: #150a24;
+  --deep-aubergine-elevated: #1e0e33;
+  --deep-aubergine-highlight: #2c1448;
 
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
+  /* Accent: Marigold (Warm, radiant, energetic gold-amber) */
+  --marigold: #ffb119;
+  --marigold-bright: #ffd05b;
+  --marigold-deep: #e09400;
+  --marigold-glow: rgba(255, 177, 25, 0.38);
+  --marigold-subtle: rgba(255, 177, 25, 0.12);
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  /* Typography Variables */
+  --font-display: var(--font-syne), 'Syne', sans-serif;
+  --font-mono: var(--font-space-grotesk), 'Space Grotesk', monospace;
+
+  /* Atmospheric Gradients */
+  --bg-gradient: radial-gradient(
+    circle at 50% 35%,
+    #1d0d32 0%,
+    #0e0717 55%,
+    #07040d 100%
+  );
+  --silver-gradient: linear-gradient(
+    135deg,
+    #ffffff 0%,
+    #ebf1f6 40%,
+    #a6b7c9 100%
+  );
+  --marigold-gradient: linear-gradient(
+    135deg,
+    #ffd56b 0%,
+    #ffb119 50%,
+    #f28a00 100%
+  );
 }
 
 * {
@@ -30,13 +57,62 @@ body {
   margin: 0;
 }
 
+html,
+body {
+  max-width: 100vw;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-color: var(--deep-aubergine-void);
+  color: var(--ice-silver);
+  font-family: var(--font-mono);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  selection-background-color: var(--marigold);
+  selection-color: var(--deep-aubergine-void);
+}
+
+::selection {
+  background-color: var(--marigold);
+  color: var(--deep-aubergine-void);
+}
+
 a {
   color: inherit;
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+button {
+  background: none;
+  border: none;
+  font: inherit;
+  cursor: pointer;
+  color: inherit;
+}
+
+/* Subtle Film Grain Noise Overlay */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 99;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--deep-aubergine-void);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--ice-silver-dim);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--marigold);
 }

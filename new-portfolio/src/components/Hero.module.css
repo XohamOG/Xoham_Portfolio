@@ -1,0 +1,156 @@
+.heroSection {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 7rem 2.5rem 2.5rem;
+  z-index: 10;
+}
+
+.editorialTop {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--ice-silver-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.tagBracket {
+  color: var(--ice-silver-dim);
+}
+
+.tagText {
+  color: var(--ice-silver-muted);
+  font-weight: 500;
+}
+
+.centerpiece {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  flex-grow: 1;
+}
+
+.bottomHud {
+  width: 100%;
+  max-width: 1400px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-top: 1px solid var(--ice-silver-border);
+  padding-top: 1.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+}
+
+.hudColLeft,
+.hudColRight {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.hudColRight {
+  align-items: flex-end;
+  text-align: right;
+}
+
+.hudLabel {
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  color: var(--ice-silver-dim);
+}
+
+.hudValue {
+  color: var(--ice-silver);
+  font-weight: 500;
+}
+
+.hudColCenter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.scrollIndicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.scrollLine {
+  width: 1px;
+  height: 28px;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    var(--ice-silver-muted) 50%,
+    var(--marigold) 100%
+  );
+  animation: scrollPulse 2.2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+@keyframes scrollPulse {
+  0% {
+    transform: scaleY(0);
+    transform-origin: top;
+    opacity: 0;
+  }
+  50% {
+    transform: scaleY(1);
+    transform-origin: top;
+    opacity: 1;
+  }
+  50.1% {
+    transform-origin: bottom;
+  }
+  100% {
+    transform: scaleY(0);
+    transform-origin: bottom;
+    opacity: 0;
+  }
+}
+
+.scrollText {
+  font-size: 0.62rem;
+  letter-spacing: 0.25em;
+  color: var(--ice-silver-dim);
+}
+
+@media (max-width: 768px) {
+  .heroSection {
+    padding: 6rem 1.25rem 1.5rem;
+  }
+
+  .editorialTop {
+    font-size: 0.65rem;
+    letter-spacing: 0.16em;
+    text-align: center;
+  }
+
+  .bottomHud {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+    text-align: center;
+  }
+
+  .hudColRight {
+    align-items: center;
+    text-align: center;
+  }
+
+  .hudColCenter {
+    order: 3;
+  }
+}
