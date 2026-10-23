@@ -1,0 +1,132 @@
+.aboutSection {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 6rem 2rem 8rem;
+  background-color: var(--bg-dark, #0a0a0a);
+  color: #ffffff;
+  z-index: 20;
+}
+
+.aboutContainer {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+}
+
+/* Header Area */
+.headerBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.8rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(235, 241, 246, 0.5);
+}
+
+.eyebrowDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--color-neon-rose, #FF2D95);
+  box-shadow: 0 0 10px var(--color-neon-rose, #FF2D95);
+}
+
+.heading {
+  font-family: var(--font-creative, 'Bricolage Grotesque', sans-serif);
+  font-size: clamp(2.8rem, 7vw, 5.2rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.headingAccent {
+  color: var(--color-cerulean, #007BA7);
+}
+
+/* Fold Text Bio Container */
+.bioCard {
+  position: relative;
+  background: rgba(18, 18, 20, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 28px;
+  padding: 3.5rem 3.5rem 4rem;
+  box-shadow:
+    0 24px 60px -20px rgba(0, 0, 0, 0.8),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  overflow: hidden;
+  transition: border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.bioCard:hover {
+  border-color: rgba(0, 123, 167, 0.35);
+  box-shadow:
+    0 30px 70px -20px rgba(0, 0, 0, 0.9),
+    0 0 35px rgba(0, 123, 167, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.quoteMark {
+  font-family: var(--font-creative, serif);
+  font-size: 3.5rem;
+  line-height: 1;
+  color: var(--color-cerulean, #007BA7);
+  opacity: 0.6;
+  margin-bottom: 1.25rem;
+  user-select: none;
+}
+
+.foldWrapper {
+  width: 100%;
+  font-family: var(--font-creative, 'Bricolage Grotesque', sans-serif);
+  line-height: 1.45;
+}
+
+/* Subtle corner aura in the card */
+.cardGlow {
+  position: absolute;
+  top: -80px;
+  right: -80px;
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 45, 149, 0.12) 0%,
+    rgba(0, 123, 167, 0.08) 50%,
+    transparent 70%
+  );
+  filter: blur(40px);
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .aboutSection {
+    padding: 4.5rem 1.25rem 6rem;
+  }
+  .bioCard {
+    padding: 2.25rem 1.75rem 2.75rem;
+    border-radius: 20px;
+  }
+}

@@ -91,12 +91,18 @@
   background: none;
   color: var(--gn-muted);
   font: inherit;
-  font-weight: 500;
+  font-family: var(--font-cartoon, inherit);
+  font-weight: 600;
+  letter-spacing: 0.02em;
   text-decoration: none;
   white-space: nowrap;
   cursor: pointer;
-  transition: color 0.2s ease;
+  transition: color 0.2s ease, transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
   -webkit-tap-highlight-color: transparent;
+}
+
+.gooey-nav__link:hover {
+  transform: scale(1.04);
 }
 
 .gooey-nav__list--active .gooey-nav__link {

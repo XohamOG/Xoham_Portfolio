@@ -18,18 +18,16 @@ export type WaveShape =
 export type ColorMode = "multicolor" | "monochrome";
 
 export const DEFAULT_VIBRANT_PALETTE = [
+  "#007BA7", // Cerulean Blue
+  "#FF2D95", // Neon Rose
   "#ff7324", // Vibrant Coral Orange
   "#00e599", // Neon Emerald Green
-  "#00d2ff", // Electric Cyan
-  "#f43f5e", // Hot Pink / Rose
   "#a855f7", // Vivid Purple / Violet
   "#fbbf24", // Golden Amber Yellow
-  "#14b8a6", // Bright Teal
   "#6366f1", // Periwinkle Indigo
   "#38bdf8", // Sky Blue
   "#cbd5e1", // Clean Silver Slate
   "#f97316", // Bright Tangerine
-  "#ec4899", // Neon Magenta
 ];
 
 export interface CursorWaveProps {
@@ -143,15 +141,15 @@ function parseColorToRgba(color: string): [number, number, number, number] {
 export default function CursorWave({
   cellSize = 42,
   influenceRadiusVmin = 24,
-  attackTime = 0.2,
-  releaseTime = 0.58,
+  attackTime = 0.1,
+  releaseTime = 0.18,
   idleScale = 0.11,
   minPeakScale = 0.8,
   maxPeakScale = 1.65,
   burstSpeed = 750,
   burstThickness = 90,
   shape = "mixed",
-  backgroundColor = "#060608",
+  backgroundColor = "#0a0a0a",
   colorMode = "multicolor",
   palette = DEFAULT_VIBRANT_PALETTE,
   dotColor = "rgba(235, 241, 246, 0.2)",
@@ -178,6 +176,9 @@ export default function CursorWave({
     targetY: number;
     active: boolean;
     lastMoveTime: number;
+    prevClientX: number;
+    prevClientY: number;
+    movementEnergy: number;
   }>({
     x: -9999,
     y: -9999,
@@ -185,6 +186,9 @@ export default function CursorWave({
     targetY: -9999,
     active: false,
     lastMoveTime: 0,
+    prevClientX: -9999,
+    prevClientY: -9999,
+    movementEnergy: 0,
   });
 
   // Typed buffers for 60-120fps performance
@@ -380,17 +384,43 @@ export default function CursorWave({
 
     const handleMouseMove = (e: MouseEvent) => {
       const rect = canvas.getBoundingClientRect();
-      mouseRef.current.targetX = e.clientX - rect.left;
-      mouseRef.current.targetY = e.clientY - rect.top;
-      mouseRef.current.active = true;
-      mouseRef.current.lastMoveTime = performance.now();
+      const currentX = e.clientX - rect.left;
+      const currentY = e.clientY - rect.top;
+      const now = performance.now();
+      const mouse = mouseRef.current;
+
+      if (mouse.prevClientX > -1000) {
+        const dx = e.clientX - mouse.prevClientX;
+        const dy = e.clientY - mouse.prevClientY;
+        const dist = Math.hypot(dx, dy);
+        // Measure movement speed & pump energy
+        const impulse = Math.min(1.4, dist / 8);
+        mouse.movementEnergy = Math.min(1.4, mouse.movementEnergy + impulse * 0.55);
+      } else {
+        mouse.movementEnergy = 0.9;
+      }
+
+      mouse.targetX = currentX;
+      mouse.targetY = currentY;
+      mouse.prevClientX = e.clientX;
+      mouse.prevClientY = e.clientY;
+      mouse.active = true;
+      mouse.lastMoveTime = now;
     };
 
     const handleMouseLeave = () => {
       mouseRef.current.active = false;
+      mouseRef.current.movementEnergy = 0;
+      mouseRef.current.prevClientX = -9999;
+      mouseRef.current.prevClientY = -9999;
     };
 
     const handleClick = (e: MouseEvent) => {
+      // Don't trigger background wave effect when clicking navbar or interactive navigation controls
+      const target = e.target as HTMLElement | null;
+      if (target && target.closest("nav, header, [data-no-wave], .gooey-nav")) {
+        return;
+      }
       triggerBurst(e.clientX, e.clientY);
     };
 
@@ -398,15 +428,35 @@ export default function CursorWave({
       if (e.touches.length > 0) {
         const touch = e.touches[0];
         const rect = canvas.getBoundingClientRect();
-        mouseRef.current.targetX = touch.clientX - rect.left;
-        mouseRef.current.targetY = touch.clientY - rect.top;
-        mouseRef.current.active = true;
-        mouseRef.current.lastMoveTime = performance.now();
+        const currentX = touch.clientX - rect.left;
+        const currentY = touch.clientY - rect.top;
+        const now = performance.now();
+        const mouse = mouseRef.current;
+
+        if (mouse.prevClientX > -1000) {
+          const dx = touch.clientX - mouse.prevClientX;
+          const dy = touch.clientY - mouse.prevClientY;
+          const dist = Math.hypot(dx, dy);
+          const impulse = Math.min(1.4, dist / 8);
+          mouse.movementEnergy = Math.min(1.4, mouse.movementEnergy + impulse * 0.55);
+        } else {
+          mouse.movementEnergy = 0.9;
+        }
+
+        mouse.targetX = currentX;
+        mouse.targetY = currentY;
+        mouse.prevClientX = touch.clientX;
+        mouse.prevClientY = touch.clientY;
+        mouse.active = true;
+        mouse.lastMoveTime = now;
       }
     };
 
     const handleTouchEnd = () => {
       mouseRef.current.active = false;
+      mouseRef.current.movementEnergy = 0;
+      mouseRef.current.prevClientX = -9999;
+      mouseRef.current.prevClientY = -9999;
     };
 
     window.addEventListener("mousemove", handleMouseMove);
@@ -433,6 +483,15 @@ export default function CursorWave({
       } else {
         mouse.x += (-9999 - mouse.x) * (1 - Math.exp(-dt * 8));
         mouse.y += (-9999 - mouse.y) * (1 - Math.exp(-dt * 8));
+      }
+
+      // Snappy decay when cursor stops moving (> 16ms since last move)
+      const timeSinceMove = currentTime - mouse.lastMoveTime;
+      if (timeSinceMove > 16) {
+        mouse.movementEnergy *= Math.exp(-dt * 22);
+        if (mouse.movementEnergy < 0.008) {
+          mouse.movementEnergy = 0;
+        }
       }
 
       // Update shockwave bursts with smooth linear-to-edge fade
@@ -471,7 +530,7 @@ export default function CursorWave({
             0.08;
         }
 
-        // 2. Cursor Proximity Wave
+        // 2. Cursor Proximity Wave: ONLY active while moving!
         const dx = cx - mouse.x;
         const dy = cy - mouse.y;
         const distSq = dx * dx + dy * dy;
@@ -479,13 +538,14 @@ export default function CursorWave({
         let dispTargetX = 0;
         let dispTargetY = 0;
 
-        if (distSq < influenceRadius * influenceRadius) {
+        if (distSq < influenceRadius * influenceRadius && mouse.movementEnergy > 0.001) {
           const dist = Math.sqrt(distSq);
           const ratio = 1 - dist / influenceRadius;
-          // Smooth cosine curve
-          cursorInfluence = Math.sin((ratio * Math.PI) / 2);
+          // Smooth cosine curve amplified by movement energy
+          const proximity = Math.sin((ratio * Math.PI) / 2);
+          cursorInfluence = proximity * Math.min(1.3, mouse.movementEnergy);
 
-          // Subtle displacement to preserve clean portfolio grid
+          // Increased physical wave displacement: pushes shapes outward in a liquid wake
           const pushAmount = cursorInfluence * (cellSize * displacementFactor);
           if (dist > 0.001) {
             dispTargetX = (dx / dist) * pushAmount;
@@ -493,7 +553,7 @@ export default function CursorWave({
           }
         }
 
-        // 3. Traveling ripple wave (clean, subtle wave crest)
+        // 3. Traveling ripple wave (increased wave impact effect)
         let burstInfluence = 0;
         for (let b = 0; b < bursts.length; b++) {
           const burst = bursts[b];
@@ -506,20 +566,20 @@ export default function CursorWave({
             const normDiff = diff / burst.thickness;
             // Cosine bell curve peaking at the wave crest
             const pulse = Math.cos((normDiff * Math.PI) / 2);
-            const waveEnergy = pulse * burst.opacity * 0.58;
+            const waveEnergy = pulse * burst.opacity * 1.25;
             burstInfluence += waveEnergy;
 
-            // Subtle liquid wave nudge outward as crest rolls through
+            // Liquid wave push outward
             if (bdist > 0.001) {
-              const wavePush = waveEnergy * (cellSize * 0.1);
+              const wavePush = waveEnergy * (cellSize * 0.32);
               dispTargetX += (bdx / bdist) * wavePush;
               dispTargetY += (bdy / bdist) * wavePush;
             }
           }
         }
 
-        // Combined energy capped cleanly
-        const totalEnergy = Math.min(cursorInfluence + burstInfluence, 1.4);
+        // Combined energy with higher headroom for dramatic wave impact
+        const totalEnergy = Math.min(cursorInfluence + burstInfluence, 2.2);
         const targetScale =
           idleScale +
           ambientMod +

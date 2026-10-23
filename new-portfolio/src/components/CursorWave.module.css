@@ -3,7 +3,7 @@
   width: 100%;
   min-height: 100vh;
   overflow: hidden;
-  background-color: var(--canvas-bg, #060608);
+  background-color: var(--canvas-bg, #0a0a0a);
   contain: strict;
 }
 

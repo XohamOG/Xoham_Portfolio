@@ -105,11 +105,11 @@ interface Pipeline {
 
 const THEMES: Record<Palette, Record<string, string>> = {
   dark: {
-    '--gn-frame': 'rgba(38, 35, 46, 0.66)',
-    '--gn-frame-edge': 'rgba(255, 255, 255, 0.08)',
-    '--gn-frame-highlight': 'rgba(255, 255, 255, 0.07)',
-    '--gn-frame-shadow': '0 22px 44px -20px rgba(0, 0, 0, 0.8), 0 6px 16px -8px rgba(0, 0, 0, 0.5)',
-    '--gn-ink': '#f4f4f5',
+    '--gn-frame': 'rgba(18, 18, 20, 0.75)',
+    '--gn-frame-edge': 'rgba(255, 255, 255, 0.09)',
+    '--gn-frame-highlight': 'rgba(255, 255, 255, 0.08)',
+    '--gn-frame-shadow': '0 20px 40px -15px rgba(0, 0, 0, 0.9), 0 4px 12px -4px rgba(0, 0, 0, 0.6)',
+    '--gn-ink': '#ffffff',
     '--gn-muted': 'rgba(244, 244, 245, 0.62)'
   },
   light: {

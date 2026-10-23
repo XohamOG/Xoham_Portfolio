@@ -21,7 +21,7 @@ export default function WaveDemo() {
       maxPeakScale={1.6}
       burstSpeed={820}
       burstThickness={120}
-      backgroundColor="#060608"
+      backgroundColor="#0a0a0a"
       idleAlpha={0.24}
       ambientWave={ambient}
       waveSpin={0.06}
