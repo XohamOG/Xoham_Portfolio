@@ -141,7 +141,10 @@ const FoldText = ({
       if (/^\s+$/.test(part)) {
         return part
           .split('\n')
-          .flatMap((spaces, lineIndex) => [lineIndex > 0 ? <br key={`br-${partIndex}-${lineIndex}`} /> : null, spaces])
+          .flatMap((spaces, lineIndex) => [
+            lineIndex > 0 ? <br key={`br-${partIndex}-${lineIndex}`} /> : null,
+            spaces ? <span key={`space-${partIndex}-${lineIndex}`}>{spaces}</span> : null
+          ])
           .filter(Boolean);
       }
 
@@ -226,10 +229,20 @@ const FoldText = ({
 
     let timeline: gsap.core.Timeline | null = null;
     let scrollTriggerInstance: ScrollTrigger | null = null;
+    let isUnfolding = false;
+    let isUnfolded = false;
 
     const play = (loop: boolean) => {
       timeline?.kill();
-      timeline = gsap.timeline({ onUpdate: render, ...(loop ? { repeat: -1, repeatDelay: 0.35 } : {}) });
+      isUnfolding = true;
+      timeline = gsap.timeline({
+        onUpdate: render,
+        onComplete: () => {
+          isUnfolding = false;
+          isUnfolded = true;
+        },
+        ...(loop ? { repeat: -1, repeatDelay: 0.35 } : {})
+      });
       timeline.fromTo(pieces, { t: 0, f: 0 }, { t: 1, duration: unfoldDuration, ease: 'none', stagger: staggerVars });
       if (loop) {
         timeline.to(
@@ -241,7 +254,24 @@ const FoldText = ({
       render();
     };
 
-    const handleEnter = () => play(false);
+    const resetFold = () => {
+      timeline?.kill();
+      isUnfolding = false;
+      isUnfolded = false;
+      pieces.forEach(p => {
+        p.t = startsFolded ? 0 : 1;
+        p.f = 0;
+      });
+      render();
+    };
+
+    const handleEnter = () => {
+      if (!isUnfolded && !isUnfolding) {
+        play(false);
+      }
+    };
+
+    let observer: IntersectionObserver | null = null;
 
     if (trigger === 'hover') {
       render();
@@ -250,9 +280,33 @@ const FoldText = ({
       render();
       scrollTriggerInstance = ScrollTrigger.create({
         trigger: root,
-        start: 'top 85%',
-        once: true,
-        onEnter: handleEnter
+        start: 'top 88%',
+        once: false,
+        onEnter: handleEnter,
+        onLeaveBack: resetFold
+      });
+
+      if (typeof window !== 'undefined' && 'IntersectionObserver' in window) {
+        observer = new IntersectionObserver(
+          (entries) => {
+            const entry = entries[0];
+            if (!entry) return;
+            if (entry.isIntersecting) {
+              handleEnter();
+            } else {
+              const vh = window.innerHeight || document.documentElement.clientHeight;
+              if (entry.boundingClientRect.top >= vh * 0.5) {
+                resetFold();
+              }
+            }
+          },
+          { rootMargin: '0px 0px -10% 0px' }
+        );
+        observer.observe(root);
+      }
+
+      requestAnimationFrame(() => {
+        ScrollTrigger.refresh();
       });
     } else {
       play(trigger === 'loop');
@@ -345,6 +399,7 @@ const FoldText = ({
       window.removeEventListener('scroll', handleScroll, { capture: true });
       document.documentElement.removeEventListener('pointerleave', handleLeave);
       gsap.ticker.remove(relax);
+      observer?.disconnect();
       scrollTriggerInstance?.kill();
       timeline?.kill();
       gsap.killTweensOf(pieces);

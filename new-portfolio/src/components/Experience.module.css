@@ -1,0 +1,233 @@
+.experienceSection {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem 2rem 7rem;
+  background-color: var(--bg-dark, #0a0a0a);
+  color: #ffffff;
+  z-index: 20;
+  overflow: hidden;
+}
+
+.experienceContainer {
+  width: 100%;
+  max-width: 1220px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+}
+
+/* Section Header */
+.headerBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.heading {
+  font-family: var(--font-creative, 'Bricolage Grotesque', sans-serif);
+  font-size: clamp(2.4rem, 6vw, 4.5rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-align: center;
+  margin: 0;
+}
+
+.headingAccent {
+  color: var(--color-pink, #FF2D95);
+}
+
+/* 3-Card Grid */
+.cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.6rem;
+  width: 100%;
+}
+
+/* Card Content Inside BorderGlow */
+.cardContent {
+  padding: 2.25rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.75rem;
+  height: 100%;
+  background: #0e0e11;
+  border-radius: inherit;
+}
+
+.cardTop {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.cardHeaderRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.companyName {
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+/* Subtle glowing theme status dot */
+.statusDotCerulean {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-cerulean, #007BA7);
+  box-shadow: 0 0 8px rgba(0, 123, 167, 0.7);
+}
+
+.statusDotPink {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-pink, #FF2D95);
+  box-shadow: 0 0 8px rgba(255, 45, 149, 0.7);
+}
+
+/* Date Pills */
+.cardPeriod {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.76rem;
+  font-weight: 600;
+  padding: 0.25rem 0.65rem;
+  border-radius: 9999px;
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+}
+
+.cardPeriodCerulean {
+  color: #7dd3fc;
+  background: rgba(0, 123, 167, 0.1);
+  border: 1px solid rgba(0, 123, 167, 0.28);
+}
+
+.cardPeriodPink {
+  color: #f472b6;
+  background: rgba(255, 45, 149, 0.1);
+  border: 1px solid rgba(255, 45, 149, 0.28);
+}
+
+.roleTitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.35;
+  color: #f4f4f5;
+  margin: 0;
+  letter-spacing: -0.015em;
+}
+
+.highlightsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.highlightItem {
+  position: relative;
+  padding-left: 1.15rem;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: rgba(244, 244, 245, 0.68);
+}
+
+.highlightItem::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.58em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+}
+
+.highlightItemCerulean::before {
+  background: var(--color-cerulean, #007BA7);
+  box-shadow: 0 0 6px rgba(0, 123, 167, 0.5);
+}
+
+.highlightItemPink::before {
+  background: var(--color-pink, #FF2D95);
+  box-shadow: 0 0 6px rgba(255, 45, 149, 0.5);
+}
+
+/* Bottom Tech Pills */
+.cardBottom {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  padding-top: 1.25rem;
+}
+
+.techPills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.techPill {
+  font-size: 0.73rem;
+  font-weight: 500;
+  padding: 0.25rem 0.55rem;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(244, 244, 245, 0.7);
+  letter-spacing: 0.01em;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.techPillCerulean:hover {
+  border-color: rgba(0, 123, 167, 0.45);
+  color: #e0f2fe;
+}
+
+.techPillPink:hover {
+  border-color: rgba(255, 45, 149, 0.45);
+  color: #fce7f3;
+}
+
+/* Responsive */
+@media (max-width: 1060px) {
+  .cardsGrid {
+    grid-template-columns: 1fr;
+    max-width: 580px;
+    gap: 1.75rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .experienceSection {
+    padding: 2.5rem 1.25rem 5rem;
+  }
+  .cardContent {
+    padding: 1.75rem 1.4rem;
+  }
+}

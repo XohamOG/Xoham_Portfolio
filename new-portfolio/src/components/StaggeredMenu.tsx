@@ -10,6 +10,8 @@ export interface StaggeredMenuItem {
   label: string;
   ariaLabel?: string;
   link: string;
+  target?: string;
+  rel?: string;
 }
 
 export interface StaggeredMenuSocialItem {
@@ -406,7 +408,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
         })()}
       </div>
       <header className="staggered-menu-header" aria-label="Main navigation header">
-        <a href="#home" className="sm-logo" aria-label="Xoham Home">
+        <a href="#home" className="sm-logo" aria-label="Xoham.xyz Home">
           {logoUrl ? (
             /* eslint-disable-next-line @next/next/no-img-element */
             <img
@@ -418,10 +420,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
               height={24}
             />
           ) : (
-            <span className="sm-logo-text">
-              XOHAM
-              <span className="sm-logo-dot" aria-hidden="true" />
-            </span>
+            <span className="sm-logo-text">Xoham.xyz</span>
           )}
         </a>
         <button
@@ -458,6 +457,8 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
                   <a
                     className="sm-panel-item"
                     href={it.link}
+                    target={it.target || (it.link.endsWith('.pdf') ? '_blank' : undefined)}
+                    rel={it.rel || (it.link.endsWith('.pdf') ? 'noopener noreferrer' : undefined)}
                     aria-label={it.ariaLabel || it.label}
                     data-index={idx + 1}
                     onClick={closeMenu}

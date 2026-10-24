@@ -54,10 +54,9 @@
   font-weight: 800;
   letter-spacing: -0.02em;
   color: #ffffff;
-  text-transform: uppercase;
+  text-transform: none;
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
 }
 
 .sm-logo-dot {
@@ -89,6 +88,8 @@
   overflow: visible;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
   transition:
     background-color 0.3s ease,
     border-color 0.3s ease,
@@ -398,11 +399,18 @@
 }
 
 @media (max-width: 640px) {
+  .staggered-menu-header {
+    padding: 1.25rem 1rem;
+    padding-top: max(1.25rem, env(safe-area-inset-top));
+  }
+
   .staggered-menu-panel {
     width: 100%;
     left: 0;
     right: 0;
     padding: 6rem 1.5rem 2rem 1.5rem;
+    padding-top: max(6rem, calc(env(safe-area-inset-top) + 4.5rem));
+    padding-bottom: max(2rem, env(safe-area-inset-bottom));
   }
 
   .sm-panel-item {
