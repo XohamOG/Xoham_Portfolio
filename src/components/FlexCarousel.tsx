@@ -1174,7 +1174,7 @@ const FlexCarousel: React.FC<FlexCarouselProps> = ({
 
     const onWheel = (e: WheelEvent) => {
       const s = settingsRef.current;
-      if (!s || e.ctrlKey) return;
+      if (!s || !s.captureWheel || e.ctrlKey) return;
       let dx = e.deltaX;
       let dy = e.deltaY;
       if (e.shiftKey && Math.abs(dx) < Math.abs(dy)) {
@@ -1183,7 +1183,7 @@ const FlexCarousel: React.FC<FlexCarouselProps> = ({
       }
       const unit = e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? height : 1;
       const horizontal = Math.abs(dx) > Math.abs(dy);
-      if (!horizontal && !s.captureWheel) return;
+      if (!horizontal) return;
       e.preventDefault();
       skipIntro();
       interactedAt = performance.now();
@@ -1244,7 +1244,9 @@ const FlexCarousel: React.FC<FlexCarouselProps> = ({
     container.addEventListener('pointerup', onPointerUp);
     container.addEventListener('pointerleave', onPointerLeave);
     container.addEventListener('pointercancel', onPointerCancel);
-    container.addEventListener('wheel', onWheel, { passive: false });
+    if (settingsRef.current?.captureWheel) {
+      container.addEventListener('wheel', onWheel, { passive: false });
+    }
     container.addEventListener('keydown', onKeyDown);
     container.addEventListener('focus', onFocus);
     container.addEventListener('blur', onBlur);
