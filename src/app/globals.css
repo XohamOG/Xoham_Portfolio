@@ -1,0 +1,46 @@
+:root {
+  --bg-dark: #0a0a0a; /* Jet Black */
+  --color-cerulean: #007BA7; /* Cerulean Blue */
+  --color-neon-rose: #FF2D95; /* Neon Rose Energy Accent */
+  --accent-white: #ffffff;
+  --accent-white-glow: rgba(255, 255, 255, 0.45);
+  --font-creative: var(--font-bricolage), var(--font-fredoka), var(--font-outfit), sans-serif;
+  --font-cartoon: var(--font-fredoka), var(--font-bricolage), sans-serif;
+  --font-display: var(--font-creative);
+  --font-mono: var(--font-space-grotesk), monospace, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  max-width: 100vw;
+  min-height: 100vh;
+  background-color: var(--bg-dark);
+  color: #ebf1f6;
+  font-family: var(--font-display);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+  font: inherit;
+}

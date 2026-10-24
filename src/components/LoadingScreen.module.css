@@ -1,0 +1,48 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: #0a0a0a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.55s ease;
+  pointer-events: auto;
+  user-select: none;
+}
+
+.overlayHidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.ambientGlow {
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 123, 167, 0.09) 0%, rgba(255, 45, 149, 0.06) 50%, transparent 75%);
+  filter: blur(80px);
+  pointer-events: none;
+}
+
+.chipWrapper {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: chipAppear 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes chipAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.94) translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}

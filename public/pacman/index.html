@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>PAC-MAN Arcade</title>
+  
+  <style type="text/css">
+    @font-face {
+      font-family: 'BDCartoonShoutRegular';
+      src: url('BD_Cartoon_Shout-webfont.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #07070a;
+      color: #ffffff;
+      font-family: 'BDCartoonShoutRegular', monospace, sans-serif;
+      min-height: 100vh;
+      width: 100vw;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    /* CRT scanline simulation */
+    .crt-overlay {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(
+        rgba(18, 16, 16, 0) 50%,
+        rgba(0, 0, 0, 0.28) 50%
+      );
+      background-size: 100% 4px;
+      z-index: 100;
+    }
+
+    /* Top Bar */
+    .top-bar {
+      position: fixed;
+      top: 14px;
+      left: 20px;
+      right: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 110;
+    }
+
+    .exit-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 999px;
+      color: #ffffff;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .exit-btn:hover {
+      background: rgba(255, 45, 149, 0.2);
+      border-color: #FF2D95;
+      color: #FF2D95;
+      box-shadow: 0 0 16px rgba(255, 45, 149, 0.4);
+    }
+
+    .audio-btn {
+      padding: 8px 14px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 999px;
+      color: #ffffff;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .audio-btn:hover {
+      background: rgba(0, 123, 167, 0.25);
+      border-color: #007BA7;
+    }
+
+    /* Arcade Cabinet Container */
+    .arcade-cabinet {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 12px;
+      background: #000000;
+      border: 3px solid #007BA7;
+      border-radius: 16px;
+      box-shadow: 0 0 45px rgba(0, 123, 167, 0.35), inset 0 0 25px rgba(0, 0, 0, 0.9);
+      margin: auto 0;
+    }
+
+    #pacman {
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #pacman canvas {
+      border-radius: 8px;
+      display: block;
+      image-rendering: -webkit-optimize-contrast;
+      image-rendering: crisp-edges;
+      image-rendering: pixelated;
+    }
+
+    #shim {
+      font-family: 'BDCartoonShoutRegular';
+      position: absolute;
+      visibility: hidden;
+    }
+
+    /* Controls Instruction */
+    .controls-hint {
+      margin-top: 10px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.45);
+      letter-spacing: 0.04em;
+      text-align: center;
+    }
+
+    /* Virtual D-pad for mobile */
+    .dpad-container {
+      display: none;
+      grid-template-columns: repeat(3, 46px);
+      grid-template-rows: repeat(3, 46px);
+      gap: 6px;
+      margin-top: 14px;
+    }
+
+    @media (max-width: 680px) {
+      .dpad-container {
+        display: grid;
+      }
+    }
+
+    .dpad-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+      color: #ffffff;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      user-select: none;
+      touch-action: manipulation;
+    }
+
+    .dpad-btn:active {
+      background: #007BA7;
+    }
+
+    .dpad-up { grid-column: 2; grid-row: 1; }
+    .dpad-left { grid-column: 1; grid-row: 2; }
+    .dpad-down { grid-column: 2; grid-row: 3; }
+    .dpad-right { grid-column: 3; grid-row: 2; }
+  </style>
+</head>
+
+<body>
+  <div class="crt-overlay"></div>
+  <div id="shim">shim for font face</div>
+
+  <!-- Top Navigation -->
+  <header class="top-bar">
+    <a href="/" class="exit-btn" id="exitLink">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+        <polyline points="15 18 9 12 15 6" />
+      </svg>
+      Exit to Portfolio
+    </a>
+
+    <button type="button" class="audio-btn" id="soundBtn">
+      🔊 Sound: ON
+    </button>
+  </header>
+
+  <!-- Arcade Cabinet -->
+  <div class="arcade-cabinet">
+    <div id="pacman"></div>
+
+    <div class="controls-hint">
+      Arrow Keys / WASD to move • Space or N to Start • M to Mute • P to Pause
+    </div>
+
+    <!-- Mobile Virtual Controls -->
+    <div class="dpad-container">
+      <button type="button" class="dpad-btn dpad-up" data-key="38">▲</button>
+      <button type="button" class="dpad-btn dpad-left" data-key="37">◀</button>
+      <button type="button" class="dpad-btn dpad-right" data-key="39">▶</button>
+      <button type="button" class="dpad-btn dpad-down" data-key="40">▼</button>
+    </div>
+  </div>
+
+  <script src="pacman.js"></script>
+  <script src="modernizr-1.5.min.js"></script>
+
+  <script>
+    var el = document.getElementById("pacman");
+
+    // Dynamic responsive width calculation to fit viewport perfectly
+    function calcWidth() {
+      var maxW = 380;
+      var availH = window.innerHeight - 180;
+      var targetW = Math.min(window.innerWidth - 48, availH * 0.72, maxW);
+      return Math.max(280, Math.floor(targetW));
+    }
+
+    var gameWidth = calcWidth();
+    el.style.width = gameWidth + "px";
+    el.style.height = Math.round(gameWidth * 1.35) + "px";
+
+    if (Modernizr.canvas && Modernizr.localstorage && 
+        Modernizr.audio && (Modernizr.audio.ogg || Modernizr.audio.mp3)) {
+      window.setTimeout(function () { 
+        PACMAN.init(el, "./"); 
+      }, 50);
+    } else { 
+      el.innerHTML = "<p style='padding:20px; text-align:center;'>Loading Canvas...</p>";
+    }
+
+    // Direct audio toggle button
+    var soundBtn = document.getElementById("soundBtn");
+    soundBtn.addEventListener("click", function() {
+      if (typeof PACMAN !== "undefined" && PACMAN.toggleSound) {
+        var isMuted = PACMAN.toggleSound();
+        soundBtn.textContent = isMuted ? "🔇 Muted" : "🔊 Sound: ON";
+        soundBtn.style.color = isMuted ? "#f87171" : "#ffffff";
+        soundBtn.style.borderColor = isMuted ? "rgba(248, 113, 113, 0.4)" : "rgba(255, 255, 255, 0.2)";
+      }
+    });
+
+    // Virtual D-pad input dispatcher
+    document.querySelectorAll(".dpad-btn").forEach(function(btn) {
+      function sendKey(e) {
+        e.preventDefault();
+        var key = parseInt(btn.getAttribute("data-key"), 10);
+        var evt = new KeyboardEvent("keydown", { keyCode: key, which: key });
+        document.dispatchEvent(evt);
+      }
+      btn.addEventListener("touchstart", sendKey, { passive: false });
+      btn.addEventListener("mousedown", sendKey);
+    });
+
+    // Exit link handle in iframe or top window
+    document.getElementById("exitLink").addEventListener("click", function(e) {
+      if (window.top && window.top !== window) {
+        e.preventDefault();
+        window.top.location.href = "/";
+      }
+    });
+  </script>
+</body>
+</html>
