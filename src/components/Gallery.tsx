@@ -4,6 +4,7 @@ import React, { useEffect } from 'react';
 import FlexCarousel, { CarouselItem } from './FlexCarousel';
 import MobileGalleryCarousel from './MobileGalleryCarousel';
 import FoldText from './FoldText';
+import ScrollToTop from './ScrollToTop';
 import styles from './Gallery.module.css';
 
 const GALLERY_ITEMS: CarouselItem[] = [
@@ -122,6 +123,11 @@ export default function Gallery({ customItems }: GalleryProps) {
         {/* Mobile Fast Native Touch Carousel */}
         <div className={styles.mobileGallery}>
           <MobileGalleryCarousel items={items} />
+        </div>
+
+        {/* Option arrow to go to the top of the page (ReactBits modern design) */}
+        <div className={styles.bottomSection}>
+          <ScrollToTop />
         </div>
       </div>
     </section>

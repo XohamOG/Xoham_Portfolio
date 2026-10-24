@@ -1,7 +1,7 @@
 .gallerySection {
   position: relative;
   width: 100%;
-  padding: 100px 24px 140px;
+  padding: 100px 24px 80px;
   background-color: #0a0a0a;
   overflow: hidden;
 }
@@ -75,9 +75,17 @@
   box-shadow: 0 24px 60px -15px rgba(0, 0, 0, 0.7);
 }
 
+.bottomSection {
+  margin-top: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
 @media (max-width: 768px) {
   .gallerySection {
-    padding: 50px 12px 75px;
+    padding: 50px 12px 60px;
   }
 
   .headerBlock {
@@ -90,5 +98,9 @@
 
   .mobileGallery {
     display: block !important;
+  }
+
+  .bottomSection {
+    margin-top: 36px;
   }
 }
