@@ -33,13 +33,13 @@ const INITIAL_PROJECTS: ProjectCardData[] = [
   {
     id: 'project-2',
     number: '#002',
-    title: 'Forensodont',
-    category: 'Computer Vision // Forensic Dentistry',
-    preset: 'swirl',
-    image: '/images/project-cards/forensodont-front.png',
-    backImage: '/images/project-cards/forensodont-back.png',
-    liveUrl: 'https://github.com/XohamOG/Forensodont',
-    githubUrl: 'https://github.com/XohamOG/Forensodont'
+    title: 'NaviBus',
+    category: 'Transit Tracking // Real-Time Systems',
+    preset: 'shards',
+    image: '/images/project-cards/navibus-front.png',
+    backImage: '/images/project-cards/navibus-back.png',
+    liveUrl: 'https://github.com/AadiSingh0805/NaviBus',
+    githubUrl: 'https://github.com/AadiSingh0805/NaviBus'
   },
   {
     id: 'project-3',
@@ -55,17 +55,6 @@ const INITIAL_PROJECTS: ProjectCardData[] = [
   {
     id: 'project-4',
     number: '#004',
-    title: 'NaviBus',
-    category: 'Transit Tracking // Real-Time Systems',
-    preset: 'shards',
-    image: '/images/project-cards/navibus-front.png',
-    backImage: '/images/project-cards/navibus-back.png',
-    liveUrl: 'https://github.com/AadiSingh0805/NaviBus',
-    githubUrl: 'https://github.com/AadiSingh0805/NaviBus'
-  },
-  {
-    id: 'project-5',
-    number: '#005',
     title: 'GitHunters',
     category: 'Open Source // Bounty & Talent Network',
     preset: 'rainbow',
@@ -75,15 +64,26 @@ const INITIAL_PROJECTS: ProjectCardData[] = [
     githubUrl: 'https://github.com/ishapalkar/githunters-lisk'
   },
   {
+    id: 'project-5',
+    number: '#005',
+    title: 'Forensodont',
+    category: 'Computer Vision // Forensic Dentistry',
+    preset: 'swirl',
+    image: '/images/project-cards/forensodont-front.png',
+    backImage: '/images/project-cards/forensodont-back.png',
+    liveUrl: 'https://github.com/XohamOG/Forensodont',
+    githubUrl: 'https://github.com/XohamOG/Forensodont'
+  },
+  {
     id: 'project-6',
     number: '#006',
-    title: 'Healthcare Repository',
-    category: 'Hyperledger Fabric // E-Card Healthcare',
-    preset: 'glitter',
-    image: '/images/project-cards/healthcare-front.png',
-    backImage: '/images/project-cards/healthcare-back.png',
-    liveUrl: 'https://github.com/XohamOG/fabric-samples/tree/health-rep',
-    githubUrl: 'https://github.com/XohamOG/fabric-samples/tree/health-rep'
+    title: 'ArogyaSathi',
+    category: 'HealthTech // Sustainable Care',
+    preset: 'stars',
+    image: '/images/project-cards/arogyasathi-front.png',
+    backImage: '/images/project-cards/arogyasathi-back.png',
+    liveUrl: 'https://github.com/vedaXD/Genesis-Hackathon',
+    githubUrl: 'https://github.com/vedaXD/Genesis-Hackathon'
   },
   {
     id: 'project-7',
@@ -99,13 +99,13 @@ const INITIAL_PROJECTS: ProjectCardData[] = [
   {
     id: 'project-8',
     number: '#008',
-    title: 'ArogyaSathi',
-    category: 'HealthTech // Sustainable Care',
-    preset: 'stars',
-    image: '/images/project-cards/arogyasathi-front.png',
-    backImage: '/images/project-cards/arogyasathi-back.png',
-    liveUrl: 'https://github.com/vedaXD/Genesis-Hackathon',
-    githubUrl: 'https://github.com/vedaXD/Genesis-Hackathon'
+    title: 'Healthcare Repository',
+    category: 'Hyperledger Fabric // E-Card Healthcare',
+    preset: 'glitter',
+    image: '/images/project-cards/healthcare-front.png',
+    backImage: '/images/project-cards/healthcare-back.png',
+    liveUrl: 'https://github.com/XohamOG/fabric-samples/tree/health-rep',
+    githubUrl: 'https://github.com/XohamOG/fabric-samples/tree/health-rep'
   },
   {
     id: 'project-9',
