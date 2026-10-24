@@ -31,12 +31,26 @@ const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://xoham.vercel.app";
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: "Soham | Creative Developer & Full-Stack Engineer",
-    template: "%s | Soham",
+    default: "Soham Patil Portfolio",
+    template: "%s | Soham Patil Portfolio",
   },
   description:
-    "Official portfolio and interactive creative space of Soham (Xoham) - Creative Developer, Full-Stack Engineer, and Interactive UI Craftsman building high-performance web experiences.",
+    "Official portfolio and interactive creative space of Soham Patil (Xoham) - Creative Developer, Full-Stack Engineer, and Interactive UI Craftsman building high-performance web experiences.",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon.png", type: "image/png", sizes: "32x32" },
+      { url: "/favicon.png", type: "image/png" },
+      { url: "/logo.png", type: "image/png" },
+    ],
+    apple: [
+      { url: "/apple-icon.png", sizes: "180x180", type: "image/png" },
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+    shortcut: "/favicon.ico",
+  },
   keywords: [
+    "Soham Patil",
     "Soham",
     "Xoham",
     "Portfolio",
@@ -54,19 +68,28 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   openGraph: {
-    title: "Soham | Creative Developer & Full-Stack Engineer",
+    title: "Soham Patil Portfolio",
     description:
-      "Official portfolio and interactive creative space of Soham (Xoham) - Creative Developer & Full-Stack Engineer.",
+      "Official portfolio and interactive creative space of Soham Patil (Xoham) - Creative Developer & Full-Stack Engineer.",
     url: baseUrl,
-    siteName: "Xoham Portfolio",
+    siteName: "Soham Patil Portfolio",
+    images: [
+      {
+        url: "/logo.png",
+        width: 708,
+        height: 708,
+        alt: "Soham Patil Logo",
+      },
+    ],
     locale: "en_US",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Soham | Creative Developer & Full-Stack Engineer",
+    title: "Soham Patil Portfolio",
     description:
-      "Official portfolio and interactive creative space of Soham (Xoham) - Creative Developer & Full-Stack Engineer.",
+      "Official portfolio and interactive creative space of Soham Patil (Xoham) - Creative Developer & Full-Stack Engineer.",
+    images: ["/logo.png"],
   },
   robots: {
     index: true,

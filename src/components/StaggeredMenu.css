@@ -39,24 +39,48 @@
   align-items: center;
   user-select: none;
   text-decoration: none;
+  cursor: pointer;
+}
+
+.sm-logo-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.sm-logo:hover .sm-logo-brand {
+  transform: translateY(-1px) scale(1.03);
 }
 
 .sm-logo-img {
   display: block;
-  height: 28px;
-  width: auto;
+  height: 38px;
+  width: 38px;
   object-fit: contain;
+  filter: drop-shadow(0 0 8px rgba(0, 123, 167, 0.45)) drop-shadow(0 0 14px rgba(255, 45, 149, 0.35));
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.3s ease;
+}
+
+.sm-logo:hover .sm-logo-img {
+  transform: rotate(-6deg) scale(1.12);
+  filter: drop-shadow(0 0 12px rgba(0, 123, 167, 0.75)) drop-shadow(0 0 20px rgba(255, 45, 149, 0.6));
 }
 
 .sm-logo-text {
   font-family: var(--font-creative, 'Bricolage Grotesque', sans-serif);
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   font-weight: 800;
   letter-spacing: -0.02em;
   color: #ffffff;
   text-transform: none;
   display: inline-flex;
   align-items: center;
+  transition: color 0.25s ease;
+}
+
+.sm-logo:hover .sm-logo-text {
+  color: #f1f5f9;
 }
 
 .sm-logo-dot {
