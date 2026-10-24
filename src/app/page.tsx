@@ -31,7 +31,6 @@ export default function Home() {
       <StaggeredMenu
         isFixed={true}
         position="right"
-        logoUrl="/logo.png"
         items={MENU_ITEMS}
         socialItems={SOCIAL_ITEMS}
         displaySocials={true}

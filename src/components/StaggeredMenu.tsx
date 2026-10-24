@@ -408,22 +408,19 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
         })()}
       </div>
       <header className="staggered-menu-header" aria-label="Main navigation header">
-        <a href="#home" className="sm-logo" aria-label="Soham Patil Home">
+        <a href="#home" className="sm-logo" aria-label="xoham.xyz Home">
           {logoUrl ? (
-            <div className="sm-logo-brand">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={logoUrl}
-                alt="Soham Patil Logo"
-                className="sm-logo-img"
-                draggable={false}
-                width={38}
-                height={38}
-              />
-              <span className="sm-logo-text">Soham Patil</span>
-            </div>
+            /* eslint-disable-next-line @next/next/no-img-element */
+            <img
+              src={logoUrl}
+              alt="Logo"
+              className="sm-logo-img"
+              draggable={false}
+              width={110}
+              height={24}
+            />
           ) : (
-            <span className="sm-logo-text">Soham Patil</span>
+            <span className="sm-logo-text">xoham.xyz</span>
           )}
         </a>
         <button
