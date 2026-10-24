@@ -187,12 +187,12 @@ export default function Projects() {
                 <SpecularButton
                   size="sm"
                   radius={12}
-                  tint="#007BA7"
-                  tintOpacity={0.15}
+                  tint="#ffffff"
+                  tintOpacity={0.06}
                   textColor="#ffffff"
-                  lineColor="#00d2ff"
-                  intensity={1}
-                  idleIntensity={0.35}
+                  lineColor="#ffffff"
+                  intensity={1.1}
+                  idleIntensity={0.12}
                   followMouse={true}
                   href={project.liveUrl || '#'}
                   target="_blank"
@@ -221,10 +221,10 @@ export default function Projects() {
                   radius={12}
                   tint="#ffffff"
                   tintOpacity={0.06}
-                  textColor="#f4f4f5"
+                  textColor="#ffffff"
                   lineColor="#ffffff"
-                  intensity={0.9}
-                  idleIntensity={0.25}
+                  intensity={1.1}
+                  idleIntensity={0.12}
                   followMouse={true}
                   href={project.githubUrl || '#'}
                   target="_blank"

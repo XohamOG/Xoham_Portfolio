@@ -2,11 +2,11 @@
   --sb-radius: 14px;
   --sb-tint: #ffffff;
   --sb-tint-opacity: 0.05;
-  --sb-line-color: #00d2ff;
-  --sb-text-color: #f4f4f5;
+  --sb-line-color: #ffffff;
+  --sb-text-color: #ffffff;
   --mouse-x: 50%;
   --mouse-y: 50%;
-  --light-opacity: 0.25;
+  --light-opacity: 0.12;
 
   position: relative;
   isolation: isolate;
@@ -24,8 +24,8 @@
   line-height: 1;
   letter-spacing: 0.02em;
   color: var(--sb-text-color);
-  background: rgba(18, 24, 38, 0.7);
-  box-shadow: 0 8px 20px -8px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  background: rgba(18, 18, 22, 0.75);
+  box-shadow: 0 8px 20px -8px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.08);
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
   cursor: pointer;
@@ -41,11 +41,11 @@
 }
 
 .specular-button:hover {
-  background: rgba(28, 36, 56, 0.85);
-  border-color: rgba(255, 255, 255, 0.28);
-  box-shadow: 0 12px 28px -10px rgba(0, 0, 0, 0.6), 
-              0 0 16px -4px var(--sb-line-color, rgba(0, 210, 255, 0.4)),
-              inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  background: rgba(28, 28, 34, 0.9);
+  border-color: rgba(255, 255, 255, 0.38);
+  box-shadow: 0 12px 28px -10px rgba(0, 0, 0, 0.7), 
+              0 0 20px -2px rgba(255, 255, 255, 0.35),
+              inset 0 1px 0 rgba(255, 255, 255, 0.25);
 }
 
 .specular-button:active {
@@ -53,7 +53,7 @@
 }
 
 .specular-button:focus-visible {
-  outline: 2px solid var(--sb-line-color, #00d2ff);
+  outline: 2px solid rgba(255, 255, 255, 0.8);
   outline-offset: 3px;
 }
 
@@ -89,10 +89,11 @@
   border-radius: inherit;
   pointer-events: none;
   z-index: 1;
-  opacity: var(--light-opacity, 0.3);
+  opacity: var(--light-opacity, 0.12);
   background: radial-gradient(
-    circle 90px at var(--mouse-x, 50%) var(--mouse-y, 50%),
-    var(--sb-line-color, rgba(255, 255, 255, 0.7)) 0%,
+    circle 95px at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(255, 255, 255, 0.35) 40%,
     transparent 70%
   );
   mix-blend-mode: screen;
@@ -100,7 +101,7 @@
 }
 
 .specular-button:hover .specular-button__beam {
-  --light-opacity: 0.85;
+  --light-opacity: 0.95;
 }
 
 /* Inner specular glass reflection */

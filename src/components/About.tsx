@@ -116,12 +116,12 @@ export default function About() {
                 <SpecularButton
                   size="md"
                   radius={14}
-                  tint="#007BA7"
-                  tintOpacity={0.16}
+                  tint="#ffffff"
+                  tintOpacity={0.06}
                   textColor="#ffffff"
-                  lineColor="#00d2ff"
-                  intensity={1}
-                  idleIntensity={0.35}
+                  lineColor="#ffffff"
+                  intensity={1.1}
+                  idleIntensity={0.12}
                   followMouse={true}
                   href="/Carwale_resume.pdf"
                   target="_blank"
@@ -150,11 +150,11 @@ export default function About() {
                   size="md"
                   radius={14}
                   tint="#ffffff"
-                  tintOpacity={0.08}
-                  textColor="#f4f4f5"
-                  lineColor="#FF2D95"
-                  intensity={0.95}
-                  idleIntensity={0.3}
+                  tintOpacity={0.06}
+                  textColor="#ffffff"
+                  lineColor="#ffffff"
+                  intensity={1.1}
+                  idleIntensity={0.12}
                   followMouse={true}
                   href="https://github.com/XohamOG"
                   target="_blank"

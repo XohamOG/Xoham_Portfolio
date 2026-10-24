@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import FlexCarousel, { CarouselItem } from './FlexCarousel';
 import MobileGalleryCarousel from './MobileGalleryCarousel';
 import FoldText from './FoldText';
@@ -26,6 +26,45 @@ interface GalleryProps {
 
 export default function Gallery({ customItems }: GalleryProps) {
   const items = customItems && customItems.length > 0 ? customItems : GALLERY_ITEMS;
+
+  useEffect(() => {
+    let hasAutoScrolled = false;
+    let lastScrollY = window.scrollY;
+
+    const handleScroll = () => {
+      const galleryEl = document.getElementById('gallery');
+      if (!galleryEl) return;
+
+      const currentScrollY = window.scrollY;
+      const scrollingDown = currentScrollY > lastScrollY;
+      lastScrollY = currentScrollY;
+
+      const rect = galleryEl.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+
+      // When user is scrolling down and the gallery section reaches mid-screen
+      if (
+        scrollingDown &&
+        !hasAutoScrolled &&
+        rect.top < windowHeight * 0.45 &&
+        rect.bottom > windowHeight
+      ) {
+        hasAutoScrolled = true;
+        window.scrollTo({
+          top: document.documentElement.scrollHeight,
+          behavior: 'smooth',
+        });
+      }
+
+      // Reset trigger if user scrolls back up above the gallery section
+      if (rect.top > windowHeight * 0.75) {
+        hasAutoScrolled = false;
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <section id="gallery" className={styles.gallerySection}>
@@ -73,7 +112,7 @@ export default function Gallery({ customItems }: GalleryProps) {
               squeeze={0.2}
               focusOnClick={true}
               captions={true}
-              captureWheel={true}
+              captureWheel={false}
               autoplay={true}
               interval={3.8}
             />
