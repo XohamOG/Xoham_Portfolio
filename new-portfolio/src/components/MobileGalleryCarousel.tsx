@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState } from "react";
 import Image from "next/image";
 import { CarouselItem } from "./FlexCarousel";
 import styles from "./MobileGalleryCarousel.module.css";

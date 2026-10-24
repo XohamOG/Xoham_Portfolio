@@ -1,15 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Fredoka:wght@600;700&family=Outfit:wght@700;800;900&family=Space+Grotesk:wght@500;600&display=swap');
-
 :root {
   --bg-dark: #0a0a0a; /* Jet Black */
   --color-cerulean: #007BA7; /* Cerulean Blue */
   --color-neon-rose: #FF2D95; /* Neon Rose Energy Accent */
   --accent-white: #ffffff;
   --accent-white-glow: rgba(255, 255, 255, 0.45);
-  --font-creative: 'Bricolage Grotesque', 'Fredoka', 'Outfit', sans-serif;
-  --font-cartoon: 'Fredoka', 'Bricolage Grotesque', sans-serif;
+  --font-creative: var(--font-bricolage), var(--font-fredoka), var(--font-outfit), sans-serif;
+  --font-cartoon: var(--font-fredoka), var(--font-bricolage), sans-serif;
   --font-display: var(--font-creative);
-  --font-mono: 'Space Grotesk', monospace, sans-serif;
+  --font-mono: var(--font-space-grotesk), monospace, sans-serif;
 }
 
 * {

@@ -237,7 +237,7 @@ export default function Cyber2048() {
           if (res.highestMerged > topMerge) topMerge = res.highestMerged;
         }
       } else if (direction === "UP") {
-        let transposed = transpose(currentBoard);
+        const transposed = transpose(currentBoard);
         for (let r = 0; r < GRID_SIZE; r++) {
           const res = slideRow(transposed[r]);
           transposed[r] = res.row;
@@ -247,7 +247,7 @@ export default function Cyber2048() {
         }
         currentBoard = transpose(transposed);
       } else if (direction === "DOWN") {
-        let transposed = transpose(currentBoard);
+        const transposed = transpose(currentBoard);
         for (let r = 0; r < GRID_SIZE; r++) {
           const reversed = [...transposed[r]].reverse();
           const res = slideRow(reversed);
